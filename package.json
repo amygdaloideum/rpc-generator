@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "auto-bind": "^1.2.1"
+    "auto-bind": "^1.2.1",
+    "uuid": "^3.3.2"
   }
 }

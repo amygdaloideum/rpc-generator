@@ -1,13 +1,14 @@
+const uuid = require('uuid/v4');
 const { ul5d6 } = require('../utils/dice-roller');
 const { getRandomSpecies } = require('../utils/species-helper');
 
 class BaseStats {
-  constructor({ modifiers }) {
-    this.stength = modifiers.strength(ul5d6(3));
-    this.agility = modifiers.agility(ul5d6(3));
-    this.intelligence = modifiers.intelligence(ul5d6(3));
-    this.charisma = modifiers.charisma(ul5d6(3));
-    this.magic = modifiers.magic(ul5d6(3));
+  constructor({ modifiers, baseRoll }) {
+    this.stength = modifiers.strength(baseRoll());
+    this.agility = modifiers.agility(baseRoll());
+    this.intelligence = modifiers.intelligence(baseRoll());
+    this.charisma = modifiers.charisma(baseRoll());
+    this.magic = modifiers.magic(baseRoll());
   }
 }
 
@@ -21,12 +22,13 @@ class DerivedStats {
 
 class Being {
   constructor() {
-    this.id = '123';
+    this.id = uuid();
     const speciesRef = getRandomSpecies();
     this.species = speciesRef.name;
     this.name = speciesRef.nameGenerator();
-    this.baseStats = new BaseStats({ modifiers: speciesRef.modifiers.base });
+    this.baseStats = new BaseStats({ modifiers: speciesRef.modifiers.base, baseRoll: () => ul5d6(3) });
     this.derivedStats = new DerivedStats({ modifiers: speciesRef.modifiers.derived });
+    this.relations = [];
   }
 }
 

@@ -3,7 +3,7 @@ const rollDn = n => Math.floor(Math.random() * n) + 1;
 const rollUlDn = (sides, ulnr) => {
   let result = rollDn(sides);
   if (result >= ulnr) {
-    result = rollDn(sides) + rollDn(sides);
+    result = rollUlDn(sides, ulnr) + rollUlDn(sides, ulnr);
   }
   return result;
 };

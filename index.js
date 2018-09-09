@@ -1,5 +1,8 @@
 const Being = require('./models/being');
+const { generateRelations } = require('./services/relation-service');
 
-const being = new Being();
+const beings = [...Array(5)].map(() => new Being());
 
-console.log(being);
+generateRelations({ beings });
+
+console.log(beings);
